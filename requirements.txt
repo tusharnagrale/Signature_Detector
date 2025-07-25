@@ -4,3 +4,4 @@ numpy
 pytesseract
 pymupdf
 Pillow
+streamlit
