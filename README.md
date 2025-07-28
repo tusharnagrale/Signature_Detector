@@ -1,79 +1,71 @@
-# Signature_Detector
-Extracts signatures from documents &amp; cheques using AI/OCR. Detects white/non-white backgrounds, isolates signatures with OpenCV &amp; PyTesseract, and saves cropped results. Ideal for banking, legal, and workflow automation.
+# Signature Extraction Tool 🖋️
 
-The Automated Signature Extraction System is a computer vision-based solution designed to detect and extract handwritten signatures from scanned documents and images, regardless of background variations. This system intelligently distinguishes between white-background documents (such as contracts, forms, and agreements) and non-white-background documents (such as cheques, bank slips, and receipts) to apply the most suitable extraction technique.
+Automatically detect and extract signatures from documents and images.
 
-Key Features
-✅ Automatic Background Detection – Classifies documents into white or non-white backgrounds for optimal signature extraction.
-✅ Dual Extraction Methods – Uses text label detection for white-background documents and ROI-based detection for cheques and similar documents.
-✅ Connected Components Analysis – Isolates signatures from noise, printed text, and other artifacts.
-✅ Noise Filtering – Eliminates small specks and printed text while preserving genuine signatures.
-✅ Flexible Output – Saves extracted signatures in a specified directory with structured filenames.
+![Demo](demo.gif) <!-- Add a demo gif if available -->
 
-Use Cases
-Document Processing Automation – Extract signatures from contracts, agreements, and forms.
+## Features ✨
+- Extract signatures from plain documents
+- Works with complex documents containing text
+- Handles various background colors
+- Simple web interface
 
-Banking & Financial Services – Detect signatures on cheques, payment slips, and financial documents.
+## Prerequisites 📋
+- Docker installed on your system
 
-Legal & Compliance – Digitize signed documents for record-keeping and verification.
+## Installation 🛠️
 
-Workflow Automation – Integrate with OCR and document management systems for end-to-end processing.
+### Using Docker (Recommended)
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/yourusername/signature-extractor.git
+   cd signature-extractor
 
-Technical Approach
-Background Detection – Uses pixel intensity analysis to determine if the document has a white background.
+### Project Structure 📂
 
-White-Background Processing –
+signature-extractor/
+├── app.py               # Main application file
+├── signatureExtractor.py # Core signature extraction logic
+├── Dockerfile           # Docker configuration
+├── requirements.txt     # Python dependencies
+├── temp_uploads/        # Temporary upload storage
+└── extracted_signatures/ # Extracted signatures storage
 
-Uses Tesseract OCR to detect "Signature," "Sign," or "Signed" labels.
+### Build the Docker image:
 
-Extracts the region above these labels where signatures typically appear.
+*bash
+docker build -t signature-extractor .
+Run the container:
 
-Non-White-Background Processing –
+*bash
+docker run -p 8501:8501 signature-extractor
+Open your browser at http://localhost:8501
 
-Focuses on the bottom-right region (common for cheques).
 
-Applies adaptive thresholding and connected components analysis to isolate signatures.
+*Without Docker (For Development)
+Install Tesseract OCR on your system:
 
-Signature Extraction –
+Windows: Download installer from UB Mannheim
 
-Uses morphological operations to clean noise.
+MacOS: brew install tesseract
 
-Identifies the largest connected component (likely the signature).
+Linux: sudo apt install tesseract-ocr
 
-Applies padding and crops the exact signature region.
+Install Python dependencies:
 
-Technologies Used
-OpenCV – Image processing, thresholding, and contour detection.
+bash
+pip install -r requirements.txt
+Run the application:
 
-PyTesseract (Tesseract OCR) – Text detection for signature label recognition.
+bash
+streamlit run app.py
 
-NumPy – Matrix operations for image manipulation.
 
-Python – Core scripting and automation.
+### Troubleshooting 🔧
 
-Expected Outcomes
-High-Accuracy Signature Extraction – Works on diverse document types.
+If you get OCR errors, ensure Tesseract is properly installed in your system
 
-Reduced Manual Effort – Automates a traditionally manual process.
+For Docker permission issues, try:
 
-Scalable Solution – Can be integrated into larger document processing pipelines.
-
-Future Enhancements
-Deep Learning Integration – Train a CNN for better signature detection.
-
-Multi-Signature Detection – Handle documents with multiple signatures.
-
-Signature Verification – Compare extracted signatures against a database for authentication.
-
-Conclusion
-This system provides a robust, automated solution for extracting signatures from various document types, improving efficiency in industries like banking, legal, and corporate documentation. By combining traditional computer vision with intelligent background detection, it ensures reliable performance across different scenarios.
-
-🚀 Potential Applications:
-✔ Banking & Finance (Cheque processing, KYC documents)
-✔ Legal & Compliance (Contract management)
-✔ Corporate Workflows (HR forms, approvals)
-✔ Government & Administration (Signed applications, permits)
-
-🔧 Tech Stack: Python, OpenCV, PyTesseract, NumPy
-
-📂 Output: Extracted signatures saved in a structured directory for further processing.
+bash
+docker run -p 8501:8501 -v $(pwd)/temp_uploads:/app/temp_uploads -v $(pwd)/extracted_signatures:/app/extracted_signatures signature-extractor

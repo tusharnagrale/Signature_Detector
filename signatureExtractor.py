@@ -275,13 +275,3 @@ def extract_from_common_areas(img, image_path,output_folder):
             signature_count += 1
     
     return signature_count > 0
-
-# if __name__ == "__main__":
-#     # Example usage
-#     input_image = "inputs/10.jpg"  # Replace with your image path
-#     extracted = extract_signature(input_image)
-    
-#     if extracted:
-#         print("Signature extraction completed successfully")
-#     else:
-#         print("No signature found in the image")
