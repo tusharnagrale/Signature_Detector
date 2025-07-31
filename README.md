@@ -2,10 +2,8 @@
 
 Automatically detect and extract signatures from documents and images.
 
-![Demo](demo.gif) <!-- Add a demo gif if available -->
-
 ## Features ✨
-- Extract signatures from plain documents
+- Extract signatures from documents
 - Works with complex documents containing text
 - Handles various background colors
 - Simple web interface
@@ -18,12 +16,12 @@ Automatically detect and extract signatures from documents and images.
 ### Using Docker (Recommended)
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/signature-extractor.git
-   cd signature-extractor
+   git clone https://github.com/tusharnagrale/Signature_Detector.git
+   cd Signature_Detector
 
 ### Project Structure 📂
 
-signature-extractor/
+Signature_Detector/
 ├── app.py               # Main application file
 ├── signatureExtractor.py # Core signature extraction logic
 ├── Dockerfile           # Docker configuration
@@ -34,12 +32,12 @@ signature-extractor/
 ### Build the Docker image:
 
 *bash
-docker build -t signature-extractor .
+docker build -t signature-detector .
 Run the container:
 
 *bash
-docker run -p 8501:8501 signature-extractor
-Open your browser at http://localhost:8501
+docker run -p 8501:8501 signature-detector   
+Open your browser at http://0.0.0.0:8501
 
 
 *Without Docker (For Development)
