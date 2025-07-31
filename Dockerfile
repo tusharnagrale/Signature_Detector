@@ -4,14 +4,20 @@ FROM python:3.13-slim-bookworm
 # Set working directory
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y curl
+
 # Install system dependencies including Tesseract
 RUN apt-get update && apt-get install -y \
+    libgl1 \
+    libglib2.0-0 \
     tesseract-ocr \
     libtesseract-dev \
     libleptonica-dev \
     poppler-utils \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+RUN pip uninstall -y opencv-python && pip install opencv-python-headless
 
 # Install Python dependencies
 COPY requirements.txt .

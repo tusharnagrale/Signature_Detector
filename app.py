@@ -1,9 +1,9 @@
 import streamlit as st
-import cv2
 import numpy as np
 import os
 import shutil
 from signatureExtractor import extract_signature
+
 
 st.set_page_config(page_title="Signature Extractor", layout="centered")
 
